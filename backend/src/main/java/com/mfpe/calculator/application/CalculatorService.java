@@ -23,7 +23,12 @@ public class CalculatorService implements CalculatorUseCase {
         validate(request);
         BigDecimal result = registry.resolve(request.operation())
                 .apply(request.operandA(), request.operandB());
-        return new CalculationResult(request.operation(), result.stripTrailingZeros());
+        return new CalculationResult(request.operation(), normalize(result));
+    }
+
+    private BigDecimal normalize(BigDecimal value) {
+        BigDecimal stripped = value.stripTrailingZeros();
+        return stripped.scale() < 0 ? stripped.setScale(0) : stripped;
     }
 
     private void validate(CalculationRequest request) {

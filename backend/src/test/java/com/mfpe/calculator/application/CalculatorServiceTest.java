@@ -65,7 +65,14 @@ class CalculatorServiceTest {
         CalculationResult result = service.calculate(
                 new CalculationRequest(Operation.PERCENTAGE, new BigDecimal("50"), new BigDecimal("400")));
         assertThat(result.result()).isEqualByComparingTo("200");
-        assertThat(result.result().scale()).isLessThanOrEqualTo(0);
+        assertThat(result.result().scale()).isZero();
+    }
+
+    @Test
+    void shouldAvoidScientificNotationForWholeResults() {
+        CalculationResult result = service.calculate(
+                new CalculationRequest(Operation.ADD, new BigDecimal("60.00"), new BigDecimal("40.00")));
+        assertThat(result.result().toPlainString()).isEqualTo("100");
     }
 
     @Test

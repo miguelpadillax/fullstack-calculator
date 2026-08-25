@@ -1,6 +1,9 @@
 spring:
   application:
     name: calculator
+  jackson:
+    generator:
+      write-bigdecimal-as-plain: true
 
 server:
   port: 8080
@@ -10,3 +13,7 @@ management:
     web:
       exposure:
         include: health,info
+
+calculator:
+  cors:
+    allowed-origins: http://localhost:5173
