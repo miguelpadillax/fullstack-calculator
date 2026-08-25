@@ -1,0 +1,23 @@
+# macOS
+.DS_Store
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+*.swp
+
+# Node / frontend
+node_modules/
+dist/
+coverage/
+
+# Java / backend
+target/
+*.class
+
+# Logs & local env
+*.log
+.env
+.env.*
+!.env.example
